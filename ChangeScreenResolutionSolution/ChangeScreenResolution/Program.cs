@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ChangeScreenResolution
@@ -24,12 +25,16 @@ namespace ChangeScreenResolution
             {
                 int width = 1920;
                 int height = 1080;
+                int retries = 3;
 
                 if (args.Length > 0)
                     int.TryParse(args[0], out width);
 
                 if (args.Length > 1)
                     int.TryParse(args[1], out height);
+
+                if (args.Length > 2)
+                    int.TryParse(args[2], out retries);
 
                 string emailbody = "";
                 DisplaySettings set = DisplayManager.GetCurrentSettings();
@@ -38,16 +43,26 @@ namespace ChangeScreenResolution
                 List<DisplaySettings> displaySettings = new List<DisplaySettings>(DisplayManager.GetModesEnumerator().ToIEnumerable<DisplaySettings>());
 
                 emailbody = emailbody + "Available Modes: <br />";
-                foreach(var displaySetting in displaySettings)
+                foreach (var displaySetting in displaySettings)
                 {
-                    emailbody = emailbody +Environment.NewLine + "mode="+displaySetting.Width.ToString() + " " + displaySetting.Height.ToString();
+                    emailbody = emailbody + Environment.NewLine + "mode=" + displaySetting.Width.ToString() + " " + displaySetting.Height.ToString();
                 }
 
-                var hd = displaySettings.FirstOrDefault(d => d.Height == height && d.Width == width); 
+                DisplaySettings after;
 
-                DisplayManager.SetDisplaySettings(hd);
-
-                DisplaySettings after = DisplayManager.GetCurrentSettings();
+                while (true)
+                {
+                    try
+                    {
+                        after = ChangeDisplay(width, height, displaySettings);
+                        break; // exit while loop
+                    }
+                    catch
+                    {
+                        if (--retries == 0) throw;
+                        else Thread.Sleep(1000);
+                    }
+                }
 
                 emailbody = emailbody + "<br />" + "New resolution = " + after.Width.ToString() + " x " + after.Height.ToString();
 
@@ -56,7 +71,7 @@ namespace ChangeScreenResolution
                     SendEmail(emailTo, "ChangeScreenResolution - resolution set on " + Environment.MachineName, emailbody);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 if(emailEnabled)
                 {
@@ -67,6 +82,16 @@ namespace ChangeScreenResolution
                 Console.WriteLine(ex.ToString());
                 
             }
+        }
+
+        private static DisplaySettings ChangeDisplay(int width, int height, List<DisplaySettings> displaySettings)
+        {
+            var hd = displaySettings.FirstOrDefault(d => d.Height == height && d.Width == width);
+
+            DisplayManager.SetDisplaySettings(hd);
+
+            DisplaySettings after = DisplayManager.GetCurrentSettings();
+            return after;
         }
 
         static void SendEmail(string email, string subject, string body)
