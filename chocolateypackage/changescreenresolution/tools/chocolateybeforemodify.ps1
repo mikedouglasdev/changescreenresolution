@@ -7,3 +7,11 @@
 # NOTE: For upgrades - like the uninstall script, this script always runs from 
 #  the currently installed version, not from the new upgraded package version.
 
+# Delete shortcut if exists
+
+$shortcut = "C:\Users\All Users\Microsoft\Windows\Start Menu\Programs\Startup\csr.lnk"
+write-host "Removing shortcut (if exists)"
+if(test-path $shortcut)
+{
+    remove-item $shortcut
+}
