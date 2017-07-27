@@ -22,10 +22,10 @@ This is a nuspec. It mostly adheres to https://docs.nuget.org/create/Nuspec-Refe
      <version>1.0.1.0</version>
     <packageSourceUrl>https://github.com/mikedouglasdev/changescreenresolution/</packageSourceUrl>
     <owners>Miike Douglas</owners>
-     <title>changescreenresolution</title>
+     <title>Change Screen Resolution</title>
     <authors>Mike Douglas</authors>
     <projectUrl>https://github.com/mikedouglasdev/changescreenresolution/</projectUrl>
-    <copyright>2017</copyright> 
+    <copyright>2017 Mike Douglas</copyright> 
     <licenseUrl>https://github.com/mikedouglasdev/changescreenresolution/blob/master/LICENSE</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <tags>changescreenresolution admin automted testing</tags>
