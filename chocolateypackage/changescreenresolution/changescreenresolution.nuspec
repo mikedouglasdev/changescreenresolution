@@ -1,37 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Read this before creating packages: https://chocolatey.org/docs/create-packages -->
-<!-- It is especially important to read the above link to understand additional requirements when publishing packages to the community feed aka dot org (https://chocolatey.org/packages). -->
-
-<!-- Test your packages in a test environment: https://github.com/chocolatey/chocolatey-test-environment -->
-
-<!--
-This is a nuspec. It mostly adheres to https://docs.nuget.org/create/Nuspec-Reference. Chocolatey uses a special version of NuGet.Core that allows us to do more than was initially possible. As such there are certain things to be aware of:
-
-* the package xmlns schema url may cause issues with nuget.exe
-* Any of the following elements can ONLY be used by choco tools - projectSourceUrl, docsUrl, mailingListUrl, bugTrackerUrl, packageSourceUrl, provides, conflicts, replaces 
-* nuget.exe can still install packages with those elements but they are ignored. Any authoring tools or commands will error on those elements 
--->
-
-<!-- You can embed software files directly into packages, as long as you are not bound by distribution rights. -->
-<!-- * If you are an organization making private packages, you probably have no issues here -->
-<!-- * If you are releasing to the community feed, you need to consider distribution rights. -->
-<!-- Do not remove this test for UTF-8: if “Ω” doesn’t appear as greek uppercase omega letter enclosed in quotation marks, you should use an editor that supports UTF-8, not this one. -->
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
-    <id>changescreenresolution</id>
+    <id>change-screen-resolution</id>
      <version>1.0.1.0</version>
-    <packageSourceUrl>https://github.com/mikedouglasdev/changescreenresolution/</packageSourceUrl>
-    <owners>Miike Douglas</owners>
+    <packageSourceUrl>https://github.com/mikedouglasdev/changescreenresolution</packageSourceUrl>
+    <projectSourceUrl>https://github.com/mikedouglasdev/changescreenresolution</projectSourceUrl>
+    <bugTrackerUrl>https://github.com/mikedouglasdev/changescreenresolution/issues</bugTrackerUrl>
+    <owners>Mike Douglas</owners>
      <title>Change Screen Resolution</title>
     <authors>Mike Douglas</authors>
     <projectUrl>https://github.com/mikedouglasdev/changescreenresolution/</projectUrl>
     <copyright>2017 Mike Douglas</copyright> 
     <licenseUrl>https://github.com/mikedouglasdev/changescreenresolution/blob/master/LICENSE</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <tags>changescreenresolution admin automted testing</tags>
+    <tags>change screen resolution admin automted testing</tags>
     <summary>Utility for changing the screen resolution of a machine.  Use with VMs to set a particular screen resolution. Great for UI automated testing.</summary>
     <description>
-Main description here about the software
+Change Screen Resolution is a small utilty for changing the screen resolution of virtual machines (VMs).  This tool is useful for UI automated testing because the default resolution is much lower than the desired resolution.
 
 ### Package Specific
 
@@ -42,12 +27,12 @@ The following package parameters can be set:
  * `/LoggingEnabled` - Toggle file logging true/false
  * `/EmailEnabled` - Toggles email notifications true/false
  * `/EmailFrom` - specify the from address for email notifications
- * `/EmailTo' - specify the to address for email notifications
- * `/SendGridUser' - specify the sendgrid account username
- * `/SendGridPwd' - specify the sendgrid account password
+ * `/EmailTo` - specify the to address for email notifications
+ * `/SendGridUser` - specify the sendgrid account username
+ * `/SendGridPwd` - specify the sendgrid account password
 
 These parameters can be passed to the installer with the use of `--params`.
-For example: `--params "'/Port:82 /AdditionalTools'"`.
+For example: `--params "'/RanAtStartup:true /LoggingEnabled:true '"`.
     </description>
     <releaseNotes>1.0.1.0 Adds file logging</releaseNotes> 
     <dependencies>
@@ -55,8 +40,6 @@ For example: `--params "'/Port:82 /AdditionalTools'"`.
     </dependencies>
   </metadata>
   <files>
-    <!-- this section controls what actually gets packaged into the Chocolatey package -->
     <file src="tools\**" target="tools" />
-    <!--Building from Linux? You may need this instead: <file src="tools/**" target="tools" />-->
   </files>
 </package>
