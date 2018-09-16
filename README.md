@@ -1,7 +1,7 @@
 # changescreenresolution
 Utility for changing the screen resolution on cloud virtual machines
 
-Usage
+Usage:
 
 changescreenresolution 1920 1080
 
