@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>change-screen-resolution</id>
-     <version>1.0.1.0</version>
+     <version>1.0.1.1</version>
     <packageSourceUrl>https://github.com/mikedouglasdev/changescreenresolution</packageSourceUrl>
     <projectSourceUrl>https://github.com/mikedouglasdev/changescreenresolution</projectSourceUrl>
     <bugTrackerUrl>https://github.com/mikedouglasdev/changescreenresolution/issues</bugTrackerUrl>
@@ -24,6 +24,7 @@ Change Screen Resolution is a small utilty for changing the screen resolution of
 The following package parameters can be set:
 
  * `/RunAtStartup` - determines whether to run at startup.  Great for Auto UI VMs - defaults to "false"
+ * `/resolution` - determines the resolution for startup (default 1920x1080)
  * `/LoggingEnabled` - Toggle file logging true/false
  * `/EmailEnabled` - Toggles email notifications true/false
  * `/EmailFrom` - specify the from address for email notifications
